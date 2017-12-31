@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block body %}
+<header>
+    <h1>Imgur Album Downloader</h1>
+</header>
+<div id="all_but_header">
+    <div id="input_info">
+        <h2>Album URL:</h2>
+        www.imgur.com/a/<input type="text" maxlength="5" name="album_hash" placeholder="hash" value="AcXzX">
+        <button id=dl_btn>Download Album</button><br>
+
+        <h2>Download Directory:</h2>
+        <input type="text" name="dl_dir" placeholder="path/to/directory" value="C:\Users\Jacob\Pictures">
+
+        <div id=options>
+            <h2>Options:</h2>
+            <div id="dl_empty" class="options">
+                <input type="checkbox" checked>
+                Download only if the directory is empty
+            </div>
+            <div id="dl_new" class="options">
+                <input type="checkbox" id="new_chk" checked>
+                Create new directory to download into
+            </div>
+            <div id="new_dir" class="options" >
+                <input type="text" placeholder="New Directory">
+            </div>
+        </div>
+    </div>
+
+    <div id="dl_box">
+        <h2 id="dl_title">
+            <u>Download List</u>
+        </h2>
+        <ul id="dl_list"></ul>
+    </div>
+</div>
+
+<script type=text/javascript src="{{
+    url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}

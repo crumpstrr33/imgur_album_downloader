@@ -1,0 +1,92 @@
+/* Header Styling */
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 125px;
+    background: #252525;
+    color: white;
+    text-align: center;
+}
+header h1 {
+    margin: 0;
+    line-height: 125px;
+    vertical-align: middle;
+}
+
+/* Input and List */
+#all_but_header {
+    position: absolute;
+    top: 125px;
+    left: 0;
+    right: 0;
+}
+#input_info {
+    position: absolute;
+    top: 0;
+    left: 2em;
+}
+#dl_box {
+    position: absolute;
+    top: 30px;
+    right: 100px;
+}
+
+
+/* Options */
+#new_dir {
+    padding: 7px;
+    padding-left: 35px;
+}
+
+/* Scroll Box for Progress Title/Bars */
+#dl_title {
+    text-align: center;
+    margin: 0px;
+}
+#dl_list {
+    position: relative;
+    margin: 5px;
+    padding: 0;
+    height: 450px;
+    width: 600px;
+    border: 3px solid black;
+    overflow: auto;
+    list-style: none;
+}
+
+/* Progress Bars */
+.prog_hash {
+    font-size: 2em;
+    margin: 10px;
+    font-family: monospace;
+    color: #555;
+}
+.prog_frac {
+    margin: 10px;
+    font-family: monospace;
+    color: #555;
+}
+.prog_border {
+    position: relative;
+    background-color: black;
+    padding: 3px;
+    margin-left: 100px;
+    margin-right: 50px;
+    border-radius: 13px;
+}
+.prog_fill {
+    background-color: orange;
+    width: 0%;
+    height: 20px;
+    border-radius: 10px;
+}
+.prog_per {
+    position: absolute;
+    left: 0;
+    right: 0;   
+    z-index: 5;
+    color: white;
+    text-align: center;
+}
