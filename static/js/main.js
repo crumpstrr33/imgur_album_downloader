@@ -131,5 +131,6 @@ $(function() {
     // Bring up text box for directory
     $("#dl_new input").click(function() {
         $("#new_dir").toggle(this.checked);
+        $("#dl_empty").toggle(!this.checked);
     });
 });
