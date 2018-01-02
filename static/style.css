@@ -35,10 +35,17 @@ header h1 {
 
 
 /* Options */
-#new_dir {
-    padding: 7px;
-    padding-left: 35px;
+#dl_dir {
+    margin: 10px;
+    padding-left: 2px;
+    width: 300px;
 }
+#new_dir {
+    margin: 10px;
+    padding-left: 2px;
+    width: 300px;
+}
+
 
 /* Scroll Box for Progress Title/Bars */
 #dl_title {
