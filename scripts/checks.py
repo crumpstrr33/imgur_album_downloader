@@ -1,7 +1,7 @@
 import os
 from configparser import ConfigParser
 
-from requests import get
+import requests
 
 
 def _get_album_info(album_hash):
@@ -19,7 +19,7 @@ def _get_album_info(album_hash):
 
     # Get json for images
     auth = 'Bearer {}'.format(info['access_token'])
-    imgs = get(url, headers={'Authorization': auth})
+    imgs = requests.get(url, headers={'Authorization': auth})
 
     # Who needs readability, returns a list of tuples: (img_hash, img_type)
     # img_type is usually '.jpg' or '.png'
@@ -37,7 +37,7 @@ def check_info(new_dir, empty_dir, img_dir, album_hash):
         return 'wrong_len_hash', None
 
     # Check to make sure album exists
-    if get('https://imgur.com/a/' + album_hash).status_code != 200:
+    if requests.head('https://imgur.com/a/' + album_hash).status_code != 200:
         return 'dne_album', None
 
     # Check that it's not a 0 picture album
