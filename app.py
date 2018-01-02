@@ -1,7 +1,5 @@
 from ast import literal_eval
-import os
 
-from requests import get
 from flask import Flask, jsonify, render_template, request, Response
 
 from scripts.downloader import download_hashes
