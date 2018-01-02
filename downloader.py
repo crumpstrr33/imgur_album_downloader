@@ -46,23 +46,7 @@ def _get_album_info(album_hash):
              i['link'][-4:]) for i in imgs.json()['data']]
 
 
-def _check_with_user(string, img_dir):
-    """
-    Does checking to make sure the user wants to continue for
-    different situations.
-    """
-    while True:
-        download = input("The directory '{}' which is ".format(img_dir) +
-                         'where the images will be placed ' +
-                         string + '. Proceed anyway? [yes|no]\n')
-        if download.lower() in ['yes', 'y', 'yeah', 'yup', 'yea']:
-            return True
-        elif download in ['no', 'n', 'nope', 'oh god no']:
-            print('Download aborted.')
-            return False
-
-
-def download_image(img, img_dir):
+def _download_image(img, img_dir):
     """
     Does the actual downloading
     """
@@ -112,7 +96,7 @@ def _check_token():
             config.write(ini_file)
 
 
-def download_hashes(album_hash, img_dir, hash_id):
+def download_hashes(album_hash, img_dir, hash_id, img_list):
     """
     This function will download an imgur album. Imgur albums are in the form
     imgur.com/a/<album hash> where <album hash> is some 5 character string.
@@ -141,20 +125,12 @@ def download_hashes(album_hash, img_dir, hash_id):
 
     img_dir = os.path.join(*img_dir.split(','))
 
-    try:
-        # Get image urls and download them
-        img_list = _get_album_info(album_hash)
-    except (IOError, KeyError):
-        # Can't find .ini file
-        yield 'data:{}\nevent:{}\n\n'.format('dne_ini', 'aborted')
-        return
-
+    tot = len(img_list)
     print('\nFound {} images at {}.'.format(
         len(img_list), 'https://imgur.com/a/' + album_hash))
 
-    tot = len(img_list)
     for n, img in enumerate(img_list):
-        download_image(img, img_dir)
+        _download_image(img, img_dir)
 
         data = '{{"total": {}, "count": "{}", "id": "{}"}}'.format(
             tot, str(n + 1), hash_id)

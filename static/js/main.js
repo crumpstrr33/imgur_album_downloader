@@ -8,15 +8,15 @@ $(function() {
         var dir = $("input[name='dl_dir']").val();
         var new_dir = "False";
         var empty_dir = "False";
-        var quit = false;
+        var quit = true;
 
         // Functionality for new directory checkbox/input
         if ($("#dl_new input").is(":checked")) {
-            if (!$.trim($("#new_dir input").val()).length) {
+            if (!$.trim($("#new_dir").val()).length) {
                 alert("With the new directory checkbox checked, you need to put in a directory to download to!");
                 return false
             }
-            dir += "\\" + $("#new_dir input").val();
+            dir += "\\" + $("#new_dir").val();
             new_dir = "True";
         } else if ($("#dl_empty input").is(":checked")) {
             empty_dir = "True";
@@ -29,27 +29,31 @@ $(function() {
             data: {
                 img_dir: dir,
                 new_dir: new_dir,
-                empty_dir: empty_dir
+                empty_dir: empty_dir,
+                album_hash: hash
             },
             success: function(data) {
                 if (data.response === "dne_dir") {
-                    quit = true;
                     alert("Directory does not exist, please select one that does or select option to create a new directory.");
                 } else if (data.response === "nonempty_dir") {
-                    quit = true;
                     alert("This directory isn't empty, if that's ok then uncheck the first option.");
                 } else if (data.response === "dne_ini") {
-                    quit = true;
                     alert("Could not find the .ini file, use the relative path from the position of downloader.py");
                 } else if (data.response === "new_dir_exists") {
-                    quit = true;
                     alert("This new directory already exists.");
+                } else if (data.response === "dne_album") {
+                    alert("The album imgur.com/a/" + hash + " does not exist.");
+                } else if (data.response === "zero_imgs") {
+                    alert("The album imgur.com/a/" + hash + " has 0 images.");
+                } else if(data.response === "wrong_len_hash") {
+                    alert("The album hash needs to be 5 characters long.");
+                } else {
+                    quit = false;
                 }
+                img_list = data.img_list
             },
         });
-        console.log("HERE IS QUIT: " + quit);
         if (quit) {
-            console.log("WE QUITTING!");
             return;
         }
 
@@ -87,11 +91,13 @@ $(function() {
         .append(hr)
         .prependTo($("#dl_list"));
 
+        // Create stream
         var query = "?album_hash=" + hash +
                     "&img_dir=" + dir +
-                    "&new_dir=" + new_dir + 
-                    "&empty_dir=" + empty_dir;
-        var source = new EventSource("/download_album/" + num_bars + query);
+                    "&new_dir=" + new_dir +
+                    "&empty_dir=" + empty_dir +
+                    "&img_list=" + JSON.stringify(img_list);
+        var source = new EventSource($SCRIPT_ROOT + "/download_album/" + num_bars + query);
         source.onmessage = function(e) {
             var data = JSON.parse(e.data);
             var percent = data.count/data.total*100;
@@ -108,7 +114,7 @@ $(function() {
         // Moves on to next stream
         num_bars++;
 
-        // Return to input box
+        // Return to input bo
         $("input[name='album_hash']").focus();
 
         return false;
@@ -123,7 +129,7 @@ $(function() {
     });
 
     // Bring up text box for directory
-    $("#dl_new").click(function() {
+    $("#dl_new input").click(function() {
         $("#new_dir").toggle(this.checked);
     });
 });
