@@ -22,30 +22,6 @@ from configparser import ConfigParser
 import requests
 
 
-def _get_album_info(album_hash):
-    """
-    Will obtain and return the image hashes along wit the image file types by
-    requesting with the Imgur API where the user tokens are found in a local
-    .ini file. If the .ini file isn't found or the code is unsuccessful,
-    instead the image info will be obtained by _get_image_hashes.
-    """
-    # Gets info from .ini file
-    config = ConfigParser()
-    config.read('imgur_api_info.ini')
-    info = config['GENERAL']
-
-    url = 'https://api.imgur.com/3/album/{}/images'.format(album_hash)
-
-    # Get json for images
-    auth = 'Bearer {}'.format(info['access_token'])
-    imgs = requests.get(url, headers={'Authorization': auth})
-
-    # Who needs readability, returns a list of tuples: (img_hash, img_type)
-    # img_type is usually '.jpg' or '.png'
-    return [(i['link'][i['link'].index('imgur.com/') + len('imgur.com/'):-4],
-             i['link'][-4:]) for i in imgs.json()['data']]
-
-
 def _download_image(img, img_dir):
     """
     Does the actual downloading
