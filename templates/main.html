@@ -6,23 +6,23 @@
 <div id="all_but_header">
     <div id="input_info">
         <h2>Album URL:</h2>
-        www.imgur.com/a/<input type="text" maxlength="5" name="album_hash" placeholder="hash">
+        www.imgur.com/a/<input type="text" maxlength="5" name="album_hash" id="album_hash" placeholder="hash">
         <button id=dl_btn>Download Album</button><br>
 
         <h2>Download Directory:</h2>
-        <input type="text" name="dl_dir" placeholder="path/to/directory">
+        <input type="text" name="dl_dir" id="dl_dir" placeholder="path/to/directory">
 
         <div id=options>
             <h2>Options:</h2>
-            <div id="dl_empty" class="options">
-                <input type="checkbox" checked>
-                Download only if the directory is empty
-            </div>
             <div id="dl_new" class="options">
-                <input type="checkbox" checked>
+                <input type="checkbox">
                 Create new directory to download into
             </div>
             <input type="text" id="new_dir" placeholder="New Directory">
+            <div id="dl_empty" class="options">
+                <input type="checkbox">
+                Download only if the directory is empty
+            </div>
         </div>
     </div>
 

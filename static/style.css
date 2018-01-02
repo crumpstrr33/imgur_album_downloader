@@ -34,13 +34,17 @@ header h1 {
 }
 
 
-/* Options */
+/* Options and Input*/
+.options {
+    margin: 5px;
+}
 #dl_dir {
     margin: 10px;
     padding-left: 2px;
     width: 300px;
 }
 #new_dir {
+    display: none;
     margin: 10px;
     padding-left: 2px;
     width: 300px;
