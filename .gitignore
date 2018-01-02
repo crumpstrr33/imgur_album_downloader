@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-*.pyc
-*.ini
-=======
-*.ini
 *.pyc
 *.pyo
->>>>>>> origin/master
+*.ini
