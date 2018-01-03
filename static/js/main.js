@@ -91,6 +91,11 @@ $(function() {
         .append(hr)
         .prependTo($("#dl_list"));
 
+        // Show current downloading image
+        $("header div").css({
+            "visibility": "visible"
+        })
+
         // Create stream
         var query = "?album_hash=" + hash +
                     "&img_dir=" + dir +
@@ -101,6 +106,9 @@ $(function() {
         source.onmessage = function(e) {
             var data = JSON.parse(e.data);
             var percent = data.count/data.total*100;
+            var img_path = dir + "\\" + data.img;
+
+            $("#cur_img_path").text(img_path);
             $("#dl_in_" + data.id).width(percent + "%");
             $("#dl_per_" + data.id).text(percent.toFixed(2) + "%");
             $("#dl_frac_" + data.id).text(data.count + "/" + data.total);
@@ -108,14 +116,21 @@ $(function() {
         // Stops stream when download is done
         source.addEventListener("finished", function(e) {
             console.log("Album " + hash + " has finished downloading.");
+            setTimeout(function() {
+                $("header div").css({
+                    "visibility": "hidden"
+                });
+            }, 1000);
             source.close();
         });
 
         // Moves on to next stream
         num_bars++;
 
-        // Return to input bo
+        // Return to input box
         $("input[name='album_hash']").focus();
+
+
 
         return false;
     };

@@ -1,21 +1,37 @@
 /* Header Styling */
 header {
-    position: absolute;
+    display: flex;
+    justify-content: space-around;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
     height: 125px;
     background: #252525;
     color: white;
-    text-align: center;
 }
+
 header h1 {
     margin: 0;
     line-height: 125px;
     vertical-align: middle;
 }
+header div {
+    visibility: hidden;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    width: 450px;
+}
+header div p {
+    padding: 7px;
+    background: #999;
+    border-radius: 10px;
+    word-break: break-all;
+}
 
-/* Input and List */
+/* Main Sections */
 #all_but_header {
     position: absolute;
     top: 125px;
@@ -34,7 +50,7 @@ header h1 {
 }
 
 
-/* Options and Input*/
+/* Input Info */
 .options {
     margin: 5px;
 }
@@ -51,7 +67,7 @@ header h1 {
 }
 
 
-/* Scroll Box for Progress Title/Bars */
+/* Download Box */
 #dl_title {
     text-align: center;
     margin: 0px;

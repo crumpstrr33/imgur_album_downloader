@@ -108,8 +108,8 @@ def download_hashes(album_hash, img_dir, hash_id, img_list):
     for n, img in enumerate(img_list):
         _download_image(img, img_dir)
 
-        data = '{{"total": {}, "count": "{}", "id": "{}"}}'.format(
-            tot, str(n + 1), hash_id)
+        data = '{{"img": "{}", "total": {}, "count": {}, "id": {}}}'.format(
+            ''.join(img), tot, str(n + 1), hash_id)
 
         yield 'data:{}\n\n'.format(data)
         if n == tot - 1:
