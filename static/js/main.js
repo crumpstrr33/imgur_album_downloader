@@ -1,7 +1,7 @@
 $(function() {
     var bar_progress = [];
     var num_bars = 0;
-    
+
     // Main function, to eventually run python script
     var concat_hash = function() {
         var hash = $("input[name='album_hash']").val();
@@ -36,7 +36,7 @@ $(function() {
                 if (data.response === "dne_dir") {
                     alert("Directory does not exist, please select one that does or select option to create a new directory.");
                 } else if (data.response === "nonempty_dir") {
-                    alert("This directory isn't empty, if that's ok then uncheck the first option.");
+                    alert("This directory isn't empty, if that's ok then uncheck the second option.");
                 } else if (data.response === "dne_ini") {
                     alert("Could not find the .ini file, use the relative path from the position of downloader.py");
                 } else if (data.response === "new_dir_exists") {
@@ -129,8 +129,6 @@ $(function() {
 
         // Return to input box
         $("input[name='album_hash']").focus();
-
-
 
         return false;
     };
